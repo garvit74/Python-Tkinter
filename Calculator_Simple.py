@@ -3,10 +3,12 @@ from tkinter import *
 root = Tk()
 root.title("Simple Calculator")
 
-e = Entry(root, width=35, borderwidth=5)
+e = Entry(root, width=35, borderwidth=5, font=('caliber', 10, 'bold'))
 e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
 f_num = 0
+x = 0
+
 
 def button_click(number):
     current = e.get()
@@ -21,6 +23,35 @@ def button_clear():
 def button_add():
     first_num = e.get()
     global f_num
+    global x
+    x = 1
+    f_num = int(first_num)
+    e.delete(0, END)
+
+
+def button_sub():
+    first_num = e.get()
+    global f_num
+    global x
+    x = 2
+    f_num = int(first_num)
+    e.delete(0, END)
+
+
+def button_multiply():
+    first_num = e.get()
+    global f_num
+    global x
+    x = 3
+    f_num = int(first_num)
+    e.delete(0, END)
+
+
+def button_div():
+    first_num = e.get()
+    global f_num
+    global x
+    x = 4
     f_num = int(first_num)
     e.delete(0, END)
 
@@ -28,7 +59,14 @@ def button_add():
 def button_Equal():
     sec_num = e.get()
     e.delete(0, END)
-    e.insert(0, str(f_num + int(sec_num)))
+    if x == 1:
+        e.insert(0, str(f_num + int(sec_num)))
+    if x == 2:
+        e.insert(0, str(f_num - int(sec_num)))
+    if x == 3:
+        e.insert(0, str(f_num * int(sec_num)))
+    if x == 4:
+        e.insert(0, str(f_num / int(sec_num)))
 
 
 button_0 = Button(root, text="0", padx=40, pady=20, fg='white', bg='sky blue', command=lambda: button_click(0))
@@ -42,7 +80,9 @@ button_7 = Button(root, text="7", padx=40, pady=20, fg='white', bg='sky blue', c
 button_8 = Button(root, text="8", padx=40, pady=20, fg='white', bg='sky blue', command=lambda: button_click(8))
 button_9 = Button(root, text="9", padx=40, pady=20, fg='white', bg='sky blue', command=lambda: button_click(9))
 button_add = Button(root, text="+", padx=39, pady=20, fg='white', bg='sky blue', command=button_add)
-button_sub = Button(root, text="-", padx=40, pady=20, fg='white', bg='sky blue')
+button_sub = Button(root, text="-", padx=40, pady=20, fg='white', bg='sky blue', command=button_sub)
+button_multi = Button(root, text="*", padx=41, pady=20, fg='white', bg='sky blue', command=button_multiply)
+button_div = Button(root, text="/", padx=40, pady=20, fg='white', bg='sky blue', command=button_div)
 button_equal = Button(root, text="=", padx=87, pady=20, fg='white', bg='sky blue', command=button_Equal)
 button_clear = Button(root, text="Clear", padx=77, pady=20, fg='white', bg='sky blue', command=button_clear)
 
@@ -50,6 +90,9 @@ button_0.grid(row=4, column=0, columnspan=1)
 button_add.grid(row=5, column=0, columnspan=1)
 button_equal.grid(row=5, column=1, columnspan=2)
 button_clear.grid(row=4, column=1, columnspan=2)
+button_sub.grid(row=6, column=0, columnspan=1)
+button_div.grid(row=6, column=1, columnspan=1)
+button_multi.grid(row=6, column=2, columnspan=1)
 
 button_1.grid(row=3, column=0)
 button_2.grid(row=3, column=1)
